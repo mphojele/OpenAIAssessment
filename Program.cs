@@ -17,7 +17,19 @@ namespace OpenAIAssessment
 
             builder.Services.AddHttpClient<IChatService, ChatService>(client =>
             {
-                client.BaseAddress = new Uri(builder.Configuration["OpenAI:baseUrl"]);
+                client.BaseAddress = new Uri(builder.Configuration["OpenAI:ChatBaseUrl"]);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", builder.Configuration["OpenAI:ServiceApiKey"]);
+            });
+            builder.Services.AddHttpClient<ITextEditService, TextEditService>(client =>
+            {
+                client.BaseAddress = new Uri(builder.Configuration["OpenAI:TextEditBaseUrl"]);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", builder.Configuration["OpenAI:ServiceApiKey"]);
+            });
+            builder.Services.AddHttpClient<IImageGenerationService, ImageGenerationService>(client =>
+            {
+                client.BaseAddress = new Uri(builder.Configuration["OpenAI:ImageGenerationBaseUrl"]);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", builder.Configuration["OpenAI:ServiceApiKey"]);
             });

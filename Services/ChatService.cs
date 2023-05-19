@@ -19,9 +19,9 @@
 
             var response = await this.httpClient.SendAsync(request);
 
-            var chat = JsonConvert.DeserializeObject<ChatResponse>(await response.Content.ReadAsStringAsync());
+            var content = JsonConvert.DeserializeObject<ChatResponse>(await response.Content.ReadAsStringAsync());
 
-            return chat;
+            return content;
         }
     }
 }

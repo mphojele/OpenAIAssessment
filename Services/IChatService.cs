@@ -1,7 +1,7 @@
-﻿using OpenAIAssessment.API;
-
-namespace OpenAIAssessment.Services
+﻿namespace OpenAIAssessment.Services
 {
+    using OpenAIAssessment.API;
+
     public interface IChatService
     {
         public Task<ChatResponse> GetAIResponse(string aiPrompt);

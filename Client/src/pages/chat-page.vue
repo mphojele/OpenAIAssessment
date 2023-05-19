@@ -34,13 +34,14 @@
             return {
                 messages: [],
                 userMessage: '',
+                apiUrl: "http://localhost:5000/api/ChatAPI",
             };
         },
         methods: {
             async sendMessage() {
                 if (this.userMessage.trim() !== '') {
                     // Send the user message to the API endpoint
-                    const response = await fetch('http://localhost:5000/api/ChatAPI', {
+                    const response = await fetch(this.apiUrl, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
