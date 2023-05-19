@@ -23,7 +23,7 @@
         {
             var response = await this.chatService.GetAIResponse(value);
 
-            return this.Ok(response);
+            return this.Ok($"\"{response.Choices[0].Text.Trim()}\"");
         }
     }
 }

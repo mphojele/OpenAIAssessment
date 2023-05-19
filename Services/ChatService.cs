@@ -1,5 +1,9 @@
 ﻿namespace OpenAIAssessment.Services
 {
+    using Newtonsoft.Json;
+
+    using OpenAIAssessment.API;
+
     public class ChatService : IChatService
     {
         private readonly HttpClient httpClient;
@@ -9,13 +13,15 @@
             this.httpClient = httpClient;
         }
 
-        public async Task<HttpResponseMessage> GetAIResponse(string aiPrompt)
+        public async Task<ChatResponse> GetAIResponse(string aiPrompt)
         {
-            var request = API.ChatRequest.GetAIAnswer(this.httpClient.BaseAddress, aiPrompt);
+            var request = ChatRequest.GetAIAnswer(this.httpClient.BaseAddress, aiPrompt);
 
             var response = await this.httpClient.SendAsync(request);
 
-            return response;
+            var chat = JsonConvert.DeserializeObject<ChatResponse>(await response.Content.ReadAsStringAsync());
+
+            return chat;
         }
     }
 }
